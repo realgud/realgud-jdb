@@ -125,26 +125,20 @@ realgud-loc-pat struct")
 ;;        "^node-debug: That's all, folks...\n")
 
 (setf (gethash "font-lock-keywords" realgud:node-debug-pat-hash)
-      '(
-	;; The frame number and first type name, if present.
-	;; E.g. ->0 in file `/etc/init.d/apparmor' at line 35
-	;;      --^-
-	("^\\(->\\|##\\)\\([0-9]+\\) "
-	 (2 realgud-backtrace-number-face))
-
-	;; File name.
-	;; E.g. ->0 in file `/etc/init.d/apparmor' at line 35
-	;;          ---------^^^^^^^^^^^^^^^^^^^^-
-	("[ \t]+\\(in\\|from\\) file `\\(.+\\)'"
-	 (2 realgud-file-name-face))
-
-	;; File name.
-	;; E.g. ->0 in file `/etc/init.d/apparmor' at line 35
-	;;                                         --------^^
-	;; Line number.
-	("[ \t]+at line \\([0-9]+\\)$"
-	 (1 realgud-line-number-face))
-	))
+  '(
+    ;; #0 module.js:380:17
+    ;;  ^ ^^^^^^^^^ ^^^ ^^
+    (concat realgud:node-debug-frame-start-regexp
+	    realgud:node-debug-frame-num-regexp " "
+	    "\\(?:" realgud:node-debug-frame-module-regexp " \\)?"
+	    "\\(" realgud:node-debug-frame-file-regexp "\\)"
+	    ":"
+	    realgud:regexp-captured-num
+	    )
+     (1 realgud-file-name-face)
+     (2 realgud-line-number-face)
+     )
+    )
 
 (setf (gethash "node-debug" realgud-pat-hash)
       realgud:node-debug-pat-hash)
@@ -166,12 +160,15 @@ the node-debug command to use, like 'out'.")
 (setf (gethash "backtrace"  realgud:node-debug-command-hash) "backtrace")
 (setf (gethash "break"      realgud:node-debug-command-hash)
       "setBreakpoint('%X',%l)")
-(setf (gethash "continue"   realgud:node-debug-command-hash) "cont")
-(setf (gethash "kill"       realgud:node-debug-command-hash) "kill")
-(setf (gethash "quit"       realgud:node-debug-command-hash) "")
-(setf (gethash "finish"     realgud:node-debug-command-hash) "out")
-(setf (gethash "shell"      realgud:node-debug-command-hash) "repl")
-(setf (gethash "eval"       realgud:node-debug-command-hash) "exec('%s')")
+(setf (gethash "clear"      realgud:node-debug-command-hash)
+      "clearBreakpoint('%X', %l)")
+(setf (gethash "continue"         realgud:node-debug-command-hash) "cont")
+(setf (gethash "kill"             realgud:node-debug-command-hash) "kill")
+(setf (gethash "quit"             realgud:node-debug-command-hash) "")
+(setf (gethash "finish"           realgud:node-debug-command-hash) "out")
+(setf (gethash "shell"            realgud:node-debug-command-hash) "repl")
+(setf (gethash "eval"             realgud:node-debug-command-hash) "exec('%s')")
+(setf (gethash "info-breakpoints" realgud:node-debug-command-hash) "breakpoints")
 
 ;; We need aliases for step and next because the default would
 ;; do step 1 and node-debug doesn't handle this. And if it did,
