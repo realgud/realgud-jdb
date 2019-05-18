@@ -3,4 +3,4 @@ debug]( https://nodejs.org/dist/latest-v6.x/docs/api/debugger.html) debugger sup
 [realgud](http://github.com/realgud/realgud). This protocol was used up until version 6.3 and
 deprecated in node version 8.
 
-For node before after 6.3, use [realgud-node-inspect]. (http://github.com/realgud/realgud-node-inspect).
+For node before after 6.3, use [realgud-node-inspect](http://github.com/realgud/realgud-node-inspect).
