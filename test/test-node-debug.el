@@ -2,7 +2,7 @@
 ;; (test-simple-run "emacs -batch -L %s -l %s" (file-name-directory (locate-library "test-simple.elc")) buffer-file-name)
 
 (require 'test-simple)
-(load-file "../node-inspect/main.el")
+(load-file "../realgud-node-debug/main.el")
 
 (eval-when-compile (defvar test:run-process-save))
 
@@ -25,11 +25,11 @@
     ))
 
 (note "nodejs-parse-cmd-args")
-(assert-equal (list '("node" "inspect") nil '("foo"))
-	      (nodejs-parse-cmd-args '("node" "inspect" "foo")))
+(assert-equal (list '("node" "debug") nil '("foo"))
+	      (nodejs-parse-cmd-args '("node" "debug" "foo")))
 
 ;; FIXME: need to mock remove-ansi-schmutz in realgud:nodejs
-;; (realgud:nodejs "node inspect ./gcd.js 3 5")
+;; (realgud:nodejs "node debug ./gcd.js 3 5")
 
 ;; Restore the old value of realgud:run-process
 (fset 'realgud:run-process test:run-process-save)

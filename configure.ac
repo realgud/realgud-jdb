@@ -1,6 +1,6 @@
 dnl FIXME: pick up from realgud.el
-AC_INIT(realgud-inspect, 1.0,)
-AC_CONFIG_SRCDIR(node-inspect/main.el)
+AC_INIT(realgud-node-debug, 1.0.0,)
+AC_CONFIG_SRCDIR(realgud-node-debug/main.el)
 AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE
 
@@ -49,7 +49,7 @@ AM_CONDITIONAL(INSTALL_EMACS_LISP, test "x$lispdir_realgud" != "x")
 
 AC_CONFIG_FILES([Makefile \
 		 common.mk \
-		 node-inspect/Makefile \
+		 realgud-node-debug/Makefile \
 		 test/Makefile \
 		 ])
 AC_OUTPUT

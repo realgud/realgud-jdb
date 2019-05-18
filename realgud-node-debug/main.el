@@ -1,4 +1,4 @@
-;; Copyright (C) 2016, 2018 Rocky Bernstein
+;; Copyright (C) 2019 Rocky Bernstein
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -13,17 +13,17 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;  `realgud:node-inspect' Main interface to "node inspect" debugger via Emacs
+;;  `realgud:node-debug' Main interface to older "node debugb" debugger via Emacs
 
 (require 'cl-lib)
 (require 'load-relative)
 (require 'realgud)
-(require-relative-list '("core" "track-mode") "realgud:node-inspect-")
+(require-relative-list '("core" "track-mode") "realgud:node-debug-")
 
 ;; This is needed, or at least the docstring part of it is needed to
 ;; get the customization menu to work in Emacs 24.
-(defgroup realgud:node-inspect nil
-  "The realgud interface to the node-inspect debugger"
+(defgroup realgud:node-debug nil
+  "The realgud interface to the node-debug debugger"
   :group 'realgud
   :version "24.3")
 
@@ -31,45 +31,44 @@
 ;; User-definable variables
 ;;
 
-(defcustom realgud:node-inspect-command-name
-  "node inspect"
+(defcustom realgud:node-debug-command-name
+  "node debug"
   "File name for executing the Javascript debugger and command options.
 This should be an executable on your path, or an absolute file name."
   :type 'string
-  :group 'realgud:node-inspect)
+  :group 'realgud:node-debug)
 
 ;; -------------------------------------------------------------------
 ;; The end.
 ;;
 
-(declare-function node-inspect-track-mode     'realgud-node-inspect-track-mode)
-(declare-function node-inspect-query-cmdline  'realgud:node-inspect-core)
-(declare-function node-inspect-parse-cmd-args 'realgud:node-inspect-core)
+(declare-function node-debug-track-mode     'realgud-node-debug-track-mode)
+(declare-function node-debug-query-cmdline  'realgud:node-debug-core)
+(declare-function node-debug-parse-cmd-args 'realgud:node-debug-core)
 
 ;;;###autoload
-(defun realgud:node-inspect (&optional opt-cmd-line no-reset)
-  "Invoke the node-inspect shell debugger and start the Emacs user interface.
+(defun realgud:node-debug (&optional opt-cmd-line no-reset)
+  "Invoke the node-debug shell debugger and start the Emacs user interface.
 
-String OPT-CMD-LINE specifies how to run node-inspect.
+String OPT-CMD-LINE specifies how to run node-debug.
 
 OPT-CMD-LINE is treated like a shell string; arguments are
-tokenized by `split-string-and-unquote'. The tokenized string is
-parsed by `node-inspect-parse-cmd-args' and path elements found by that
+tokenized by `split-string-and-unquote'.  The tokenized string is
+parsed by `node-debug-parse-cmd-args' and path elements found by that
 are expanded using `realgud:expand-file-name-if-exists'.
 
 Normally, command buffers are reused when the same debugger is
-reinvoked inside a command buffer with a similar command. If we
+reinvoked inside a command buffer with a similar command.  If we
 discover that the buffer has prior command-buffer information and
 NO-RESET is nil, then that information which may point into other
 buffers and source buffers which may contain marks and fringe or
-marginal icons is reset. See `loc-changes-clear-buffer' to clear
-fringe and marginal icons.
-"
+marginal icons is reset.  See `loc-changes-clear-buffer' to clear
+fringe and marginal icons."
   (interactive)
   (let ((cmd-buf
-	 (realgud:run-debugger "node-inspect"
-			       'node-inspect-query-cmdline 'node-inspect-parse-cmd-args
-			       'realgud:node-inspect-minibuffer-history
+	 (realgud:run-debugger "node-debug"
+			       'node-debug-query-cmdline 'node-debug-parse-cmd-args
+			       'realgud:node-debug-minibuffer-history
 			       opt-cmd-line no-reset)))
     ;; (if cmd-buf
     ;; 	(with-current-buffer cmd-buf
@@ -80,6 +79,6 @@ fringe and marginal icons.
     ;;   )
     ))
 
-(defalias 'node-inspect 'realgud:node-inspect)
+(defalias 'node-debug 'realgud:node-debug)
 
 (provide-me "realgud-")

@@ -1,13 +1,13 @@
-;;; realgud-node-inspect.el --- realgud front-end to newer "node inspect"
+;;; realgud-node-debug.el --- realgud front-end to older nodejs "node debug"
 
 ;; Author: Rocky Bernstein
-;; Version: 1.0
+;; Version: 1.0.0
 ;; Package-Type: multi
-;; Package-Requires: ((realgud "1.4.3") (cl-lib "0.5") (emacs "24"))
-;; URL: http://github.com/realgud/realgud-node-inspect
+;; Package-Requires: ((realgud "1.4.5") (load-relative "1.2") (cl-lib "0.5") (emacs "24"))
+;; URL: http://github.com/realgud/realgud-node-debug
 ;; Compatibility: GNU Emacs 24.x
 
-;; Copyright (C) 2015, 2016, 2018 Rocky Bernstein <rocky@gnu.org>
+;; Copyright (C) 2019 Rocky Bernstein <rocky@gnu.org>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,8 +24,9 @@
 
 ;;; Commentary:
 
-;; realgud support for the "node inspect" with V8 inspector support.
-;; See https://nodejs.org/api/debugger.html
+;; realgud support for the older "node debug" used up into node
+;; version 6 and deprecated starting with node version 8.
+;; https://nodejs.org/dist/latest-v6.x/docs/api/
 ;;
 ;;; Code:
 
@@ -35,14 +36,14 @@
 
 (require 'load-relative)
 
-(defgroup realgud-node-inspector  nil
-  "Realgud interface to the 'node inspect' debugger"
+(defgroup realgud-node-debugor  nil
+  "Realgud interface to the older 'node debug' debugger"
   :group 'realgud
   :version "24.3")
 
-(require-relative-list '( "./node-inspect/main" ) "realgud-")
-(load-relative "./node-inspect/main.el")
+(require-relative-list '( "./realgud-node-debug/main" ) "realgud-")
+(load-relative "./realgud-node-debug/main.el")
 
 (provide-me)
 
-;;; realgud-node-inspect.el ends here
+;;; realgud-node-debug.el ends here

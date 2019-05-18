@@ -1,6 +1,6 @@
-Module to add [node inspect](https://nodejs.org/api/debugger.html)'s [V8-inspector-protocol](https://chromedevtools.github.io/devtools-protocol/v8/Debugger)
-debugger support to emacs
-[realgud](http://github.com/realgud/realgud).
+Module to add the older [node
+debug]( https://nodejs.org/dist/latest-v6.x/docs/api/debugger.html) debugger support to emacs
+[realgud](http://github.com/realgud/realgud). This protocol was used up until version 6.3 and
+deprecated in node version 8.
 
-For node before version 6.3, an older protocol is used.  In realgud,
-that debugger for the older version is called node-debug.
+For node before after 6.3, use [realgud-node-inspect]. (http://github.com/realgud/realgud-node-inspect).
