@@ -1,4 +1,4 @@
-;;; realgud-node-debug.el --- realgud front-end to older nodejs "node debug"
+;;; realgud-node-debug.el --- Realgud front-end to older nodejs "node debug" -*- lexical-binding: t -*-
 
 ;; Author: Rocky Bernstein
 ;; Version: 1.0.0
@@ -24,10 +24,11 @@
 
 ;;; Commentary:
 
-;; realgud support for the older "node debug" used up into node
+;; Provides realgud support for the older "node debug" used up into node
 ;; version 6 and deprecated starting with node version 8.
 ;; https://nodejs.org/dist/latest-v6.x/docs/api/
 ;;
+
 ;;; Code:
 
 ;; Press C-x C-e at the end of the next line configure the program in
@@ -36,7 +37,7 @@
 
 (require 'load-relative)
 
-(defgroup realgud-node-debugor  nil
+(defgroup realgud-node-debug  nil
   "Realgud interface to the older 'node debug' debugger"
   :group 'realgud
   :version "24.3")

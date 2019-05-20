@@ -54,7 +54,7 @@
 ORIG-ARGS should contain a tokenized list of the command line to run.
 
 We return the a list containing
-* the name of the debugger given (e.g. node-debug) and its arguments ,
+* the name of the debugger given (e.g. ‘node-debug’) and its arguments ,
   a list of strings
 * the script name and its arguments - list of strings
 
@@ -129,7 +129,8 @@ Note that path elements have been expanded via `expand-file-name'."
 (defvar realgud:node-debug-command-name)
 
 (defun realgud:node-debug-suggest-invocation (debugger-name)
-  "Suggest a node-debug command invocation via `realgud-suggest-invocaton'."
+  "Suggest a ‘node-debug’ command invocation via `realgud-suggest-invocaton'.
+Argument DEBUGGER-NAME is not used - it is there function compatibility."
   (realgud-suggest-invocation realgud:node-debug-command-name
 			      realgud:node-debug-minibuffer-history
 			      "js" "\\.js$"))
@@ -144,8 +145,7 @@ prompts and interactive output."
   )
 
 (defun realgud:node-debug-reset ()
-  "Node-Debug cleanup - remove debugger's internal buffers (frame,
-breakpoints, etc.)."
+  "Node-Debug cleanup - remove debugger's internal buffers (frame, breakpoints, etc.)."
   (interactive)
   ;; (node-debug-breakpoint-remove-all-icons)
   (dolist (buffer (buffer-list))

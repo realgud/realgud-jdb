@@ -150,8 +150,7 @@ realgud-loc-pat struct")
       "realgud:node-debug")
 
 (defvar realgud:node-debug-command-hash (make-hash-table :test 'equal)
-  "Hash key is command name like 'finish' and the value is
-the node-debug command to use, like 'out'.")
+  "Hash key is command name like 'finish' and the value is the node-debug command to use, like 'out'.")
 
 (setf (gethash realgud:node-debug-debugger-name
 	       realgud-command-hash)
@@ -164,7 +163,7 @@ the node-debug command to use, like 'out'.")
       "clearBreakpoint('%X', %l)")
 (setf (gethash "continue"         realgud:node-debug-command-hash) "cont")
 (setf (gethash "kill"             realgud:node-debug-command-hash) "kill")
-(setf (gethash "quit"             realgud:node-debug-command-hash) "")
+(setf (gethash "quit"             realgud:node-debug-command-hash) ".exit")
 (setf (gethash "finish"           realgud:node-debug-command-hash) "out")
 (setf (gethash "shell"            realgud:node-debug-command-hash) "repl")
 (setf (gethash "eval"             realgud:node-debug-command-hash) "exec('%s')")
