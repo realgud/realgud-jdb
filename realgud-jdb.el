@@ -1,11 +1,11 @@
-;;; realgud-node-debug.el --- Realgud front-end to older nodejs "node debug" -*- lexical-binding: t -*-
+;;; realgud-jdb.el --- Realgud front-end to older nodejs "node debug" -*- lexical-binding: t -*-
 
 ;; Author: Rocky Bernstein <rocky@gnu.org>
 ;; Version: 1.0.0
 ;; Package-Type: multi
-;; Package-Requires: ((realgud "1.4.5") (load-relative "1.2") (cl-lib "0.5") (emacs "24"))
-;; URL: http://github.com/realgud/realgud-node-debug
-;; Compatibility: GNU Emacs 24.x
+;; Package-Requires: ((realgud "1.4.5") (load-relative "1.2") (cl-lib "0.5") (emacs "25"))
+;; URL: http://github.com/realgud/realgud-jdb
+;; Compatibility: GNU Emacs 25.x
 
 ;; Copyright (C) 2019 Free Software Foundation, Inc
 
@@ -24,9 +24,8 @@
 
 ;;; Commentary:
 
-;; Provides realgud support for the older "node debug" used up into node
-;; version 6 and deprecated starting with node version 8.
-;; https://nodejs.org/dist/latest-v6.x/docs/api/
+;; Provides realgud support for the Java's jdb debugger.
+;; See https://docs.oracle.com/javase/7/docs/technotes/tools/windows/jdb.html
 ;;
 
 ;;; Code:
@@ -37,14 +36,14 @@
 
 (require 'load-relative)
 
-(defgroup realgud-node-debug  nil
-  "Realgud interface to the older 'node debug' debugger"
+(defgroup realgud-jdb  nil
+  "Realgud interface the Java JDB debugger"
   :group 'realgud
-  :version "24.3")
+  :version "25.1")
 
-(require-relative-list '( "./realgud-node-debug/main" ) "realgud-")
-(load-relative "./realgud-node-debug/main.el")
+(require-relative-list '( "./realgud-jdb/jdb" ) "realgud-")
+(load-relative "./realgud-jdb/jdb.el")
 
 (provide-me)
 
-;;; realgud-node-debug.el ends here
+;;; realgud-jdb.el ends here
