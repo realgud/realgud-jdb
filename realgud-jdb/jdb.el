@@ -50,18 +50,17 @@ This should be an executable on your path, or an absolute file name."
   "Invoke the Java jdb debugger and start the Emacs user interface.
 
 String OPT-CMD-LINE is treated like a shell string; arguments are
-tokenized by `split-string-and-unquote'. The tokenized string is
+tokenized by `split-string-and-unquote'.  The tokenized string is
 parsed by `jdb-parse-cmd-args' and path elements found by that
 are expanded using `expand-file-name'.
 
 Normally, command buffers are reused when the same debugger is
-reinvoked inside a command buffer with a similar command. If we
+reinvoked inside a command buffer with a similar command.  If we
 discover that the buffer has prior command-buffer information and
 NO-RESET is nil, then that information which may point into other
 buffers and source buffers which may contain marks and fringe or
-marginal icons is reset. See `loc-changes-clear-buffer' to clear
-fringe and marginal icons.
-"
+marginal icons is reset.  See `loc-changes-clear-buffer' to clear
+fringe and marginal icons."
   (interactive)
 
   (setq gud-jdb-classpath nil)

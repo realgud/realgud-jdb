@@ -25,7 +25,7 @@
 ;; FIXME: I think the following could be generalized and moved to
 ;; realgud-... probably via a macro.
 (defvar realgud--jdb-minibuffer-history nil
-  "minibuffer history list for the command `realgud--jdb'.")
+  "Minibuffer history list for the command `realgud--jdb'.")
 
 (easy-mmode-defmap jdb-minibuffer-local-map
   '(("\C-i" . comint-dynamic-complete-filename))
@@ -42,8 +42,8 @@
    opt-debugger))
 
 (defun realgud--jdb-dot-to-slash (str)
-  "Change '.' to '/' in STR but chop off from the last . to the end. For example
-ca.mgcill.rocky.snpEff.main => ca/mcgill/rocky/snpEff"
+  "Change '.' to '/' in STR but chop off from the last .
+to the end.  For example ca.mgcill.rocky.snpEff.main => ca/mcgill/rocky/snpEff"
       ;;(setq str (replace-regexp-in-string "\\([^\\.]+\\.\\)[^\\.]+$" "\\1" str))
       ;;(setq str (replace-regexp-in-string "\\.$" "" str))
       (setq str (replace-regexp-in-string "\\." "/" str))
@@ -67,7 +67,7 @@ we will prompt for a mapping and save that the remap."
       gud-jdb-filename)
      ((file-exists-p (setq transformed-file (concat stripped-filename ".java")))
       transformed-file)
-     ((realgud--file-ignore filename ignore-re-file-list)
+     ((realgud:file-ignore filename ignore-re-file-list)
       (message "tracking ignored for %s" filename) nil)
      (t
       (if remapped-filename
@@ -119,8 +119,7 @@ For example for the following input
 we might return:
    (\"jdb\" nil \"TestMe\"))
 
-Note that the script name path has been expanded via `expand-file-name'.
-"
+Note that the script name path has been expanded via `expand-file-name'."
 
   ;; Parse the following kind of pattern:
   ;;  [ruby ruby-options] jdb jdb-options script-name script-options
@@ -155,14 +154,13 @@ Note that the script name path has been expanded via `expand-file-name'.
 (defvar realgud--jdb-command-name)
 
 (defun jdb-suggest-invocation (debugger-name)
-  "Suggest a jdb command invocation via `realgud-suggest-invocaton'"
+  "Suggest a jdb command invocation via `realgud-suggest-invocaton'."
   (realgud-suggest-invocation (or debugger-name realgud--jdb-command-name)
 			      realgud--jdb-minibuffer-history
 			      "java" "\\.java$" "jdb"))
 
 (defun jdb-reset ()
-  "Jdb cleanup - remove debugger's internal buffers (frame,
-breakpoints, etc.)."
+  "Jdb cleanup - remove debugger's internal buffers (frame, breakpoints, etc.)."
   (interactive)
   ;; (jdb-breakpoint-remove-all-icons)
   (dolist (buffer (buffer-list))

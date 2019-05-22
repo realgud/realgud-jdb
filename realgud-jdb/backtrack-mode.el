@@ -29,8 +29,7 @@
 (declare-function realgud--ruby-populate-command-keys 'realgud-lang-ruby)
 
 (defun realgud--jdb-goto-control-frame-line (pt)
-  "Display the location mentioned by a control-frame line
-described by PT."
+  "Display the location mentioned by a control-frame line described by PT."
   (interactive "d")
   (realgud-goto-line-for-pt pt "control-frame"))
 
@@ -53,7 +52,7 @@ described by PT."
   (if jdb-backtrack-mode
       (progn
 	(realgud-backtrack-mode 't)
-	(run-mode-hooks (intern (jdb-backtrack-mode-hook))))
+	(run-mode-hooks (intern (realgud--jdb-backtrack-mode-hook))))
     (progn
       (realgud-backtrack-mode nil)
       ))
@@ -65,7 +64,7 @@ described by PT."
 	(use-local-map jdb-backtrack-mode-map)
 	(message "using jdb mode map")
 	)
-    (message "jdb backtrack-mode-hook disable called"))
+    (message "jdb realgud--jdb-backtrack-mode-hook disable called"))
 )
 
 (provide-me "realgud-jdb-")
