@@ -15,10 +15,10 @@
 (require 'realgud)
 (require-relative-list '("core" "track-mode") "realgud-jdb-")
 
-(declare-function realgud--jdb-query-cmdline  'realgud--jdb-core)
-(declare-function realgud--jdb-parse-cmd-args 'realgud--jdb-core)
-(declare-function realgud--run-process        'realgud--core)
-(declare-function realgud--flatten            'realgud-utils)
+(declare-function realgud:jdb-query-cmdline  'realgud--jdb-core)
+(declare-function realgud:jdb-parse-cmd-args 'realgud--jdb-core)
+(declare-function realgud:run-process        'realgud--core)
+(declare-function realgud:flatten            'realgud-utils)
 
 (defvar realgud--jdb-file-remap nil
   "A buffer-local hash table to map a Java file reproted by jdb into a file seen in the filesystem."
@@ -84,14 +84,14 @@ fringe and marginal icons."
   (setq gud-jdb-classpath-string nil)
 
   (let* (
-	 (cmd-str (or opt-cmd-line (realgud--jdb-query-cmdline "jdb")))
+	 (cmd-str (or opt-cmd-line (realgud:jdb-query-cmdline "jdb")))
 	 (cmd-args (split-string-and-unquote cmd-str))
-	 (parsed-args (realgud--jdb-parse-cmd-args cmd-args))
+	 (parsed-args (realgud:jdb-parse-cmd-args cmd-args))
 	 (script-args (caddr parsed-args))
 	 (script-name (car script-args))
 	 (parsed-cmd-args
-	  (cl-remove-if 'nil (realgud--flatten parsed-args)))
-	 (cmd-buf (realgud--run-process "jdb" script-name parsed-cmd-args
+	  (cl-remove-if 'nil (realgud:flatten parsed-args)))
+	 (cmd-buf (realgud:run-process "jdb" script-name parsed-cmd-args
 			 'realgud--jdb-track-mode-hook no-reset))
 	 )
     (if cmd-buf
