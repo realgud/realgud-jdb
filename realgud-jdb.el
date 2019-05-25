@@ -1,4 +1,4 @@
-;;; realgud-jdb.el --- Realgud front-end to older nodejs "node debug" -*- lexical-binding: t -*-
+;;; realgud-jdb.el --- Realgud front-end to Java's jdb debugger" -*- lexical-binding: t -*-
 
 ;; Author: Rocky Bernstein <rocky@gnu.org>
 ;; Version: 1.0.0

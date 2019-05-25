@@ -14,13 +14,20 @@
 (require 'realgud)
 (require-relative-list '("init") "realgud-jdb-")
 
-(declare-function realgud--strip              'realgud-utils)
-(declare-function realgud--expand-file-name-if-exists 'realgud-core)
+(declare-function realgud:strip              'realgud-utils)
+(declare-function realgud-cmdbuf-ignore-re-file-list
+		  'realgud-buffer-command)
+(declare-function realgud-cmdbuf-filename-remap-alist
+		  'realgud-buffer-command)
+(declare-function realgud-cmdbuf-filename-remap-alist=
+		  'realgud-buffer-command)
 (declare-function realgud-parse-command-arg  'realgud-core)
 (declare-function realgud-query-cmdline      'realgud-core)
 (declare-function realgud-suggest-invocation 'realgud-core)
 (declare-function realgud--file-loc-from-line 'realgud-file)
-(declare-function realgud--find-file          'realgud-file)
+(declare-function realgud:find-file           'realgud-file)
+(declare-function realgud:file-ignore         'realgud-file)
+
 
 ;; FIXME: I think the following could be generalized and moved to
 ;; realgud-... probably via a macro.
@@ -57,7 +64,7 @@ we will prompt for a mapping and save that the remap."
 	 (cmdbuf (realgud-get-cmdbuf))
 	 (ignore-re-file-list (realgud-cmdbuf-ignore-re-file-list cmdbuf))
 	 (filename-remap-alist (realgud-cmdbuf-filename-remap-alist))
-	 (stripped-filename (realgud--strip filename))
+	 (stripped-filename (realgud:strip filename))
 	 (gud-jdb-filename (gud-jdb-find-source stripped-filename))
 	 (remapped-filename
 	  (assoc filename filename-remap-alist))
@@ -83,7 +90,7 @@ we will prompt for a mapping and save that the remap."
 	      (guess-filename (realgud--jdb-dot-to-slash filename)))
 	  (setq remapped-filename
 		(buffer-file-name
-		 (realgud--find-file marker guess-filename
+		 (realgud:find-file marker guess-filename
 				    directory "%s.java")))
 	  (when (and remapped-filename (file-exists-p remapped-filename))
      	    (realgud-cmdbuf-filename-remap-alist=
