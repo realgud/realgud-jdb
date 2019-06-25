@@ -12,14 +12,14 @@
 (eval-when-compile
   (defvar dbg-name)   (defvar realgud-pat-hash)   (defvar loc-pat)
   (defvar test-dbgr)  (defvar test-text)         (defvar prompt-pat)
-  (defvar realgud:jdb-pat-hash)
+  (defvar realgud--jdb-pat-hash)
 )
 
 (test-simple-start)
 
 (note "jdb prompt matching")
 (set (make-local-variable 'prompt-pat)
-     (gethash "prompt" realgud:jdb-pat-hash))
+     (gethash "prompt" realgud--jdb-pat-hash))
 (prompt-match "main[1] "  "1" "most common main prompt")
 (prompt-match "main[2] "  "2" "main prompt up a level")
 (prompt-match "> " nil "no loc prompt")

@@ -13,7 +13,7 @@
 (require 'realgud-lang-java)
 
 (defvar realgud-pat-hash)
-(declare-function make-realgud-loc-pat (realgud-loc))
+(declare-function make-realgud-loc-pat 'realgud/common/regexp.el)
 
 (defconst realgud--jdb-identifier "[A-Za-z_][A-Za-z0-9_.]+"
 "Regexp string that matches a Java identifier possily with class

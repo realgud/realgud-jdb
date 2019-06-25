@@ -16,12 +16,12 @@
 (require-relative-list '("core" "track-mode") "realgud-jdb-")
 
 (declare-function realgud:jdb-query-cmdline  'realgud--jdb-core)
-(declare-function realgud:jdb-parse-cmd-args 'realgud--jdb-core)
+(declare-function realgud--jdb-parse-cmd-args 'realgud--jdb-core)
 (declare-function realgud:run-process        'realgud--core)
 (declare-function realgud:flatten            'realgud-utils)
 
 (defvar realgud--jdb-file-remap nil
-  "A buffer-local hash table to map a Java file reproted by jdb into a file seen in the filesystem."
+  "A buffer-local hash table to map a Java file reported by jdb into a file seen in the filesystem."
 )
 
 
@@ -51,7 +51,7 @@ This should be an executable on your path, or an absolute file name."
 
 String OPT-CMD-LINE is treated like a shell string; arguments are
 tokenized by `split-string-and-unquote'.  The tokenized string is
-parsed by `jdb-parse-cmd-args' and path elements found by that
+parsed by `realgud--jdb-parse-cmd-args' and path elements found by that
 are expanded using `expand-file-name'.
 
 Normally, command buffers are reused when the same debugger is
@@ -84,9 +84,9 @@ fringe and marginal icons."
   (setq gud-jdb-classpath-string nil)
 
   (let* (
-	 (cmd-str (or opt-cmd-line (realgud:jdb-query-cmdline "jdb")))
+	 (cmd-str (or opt-cmd-line (realgud--jdb-query-cmdline "jdb")))
 	 (cmd-args (split-string-and-unquote cmd-str))
-	 (parsed-args (realgud:jdb-parse-cmd-args cmd-args))
+	 (parsed-args (realgud--jdb-parse-cmd-args cmd-args))
 	 (script-args (caddr parsed-args))
 	 (script-name (car script-args))
 	 (parsed-cmd-args

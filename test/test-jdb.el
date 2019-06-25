@@ -7,12 +7,12 @@
 (test-simple-start)
 
 (declare-function __FILE__  'load-relative)
-(declare-function realgud:jdb-parse-cmd-args 'realgud:jdb-core)
-(declare-function realgud:jdb-dot-to-slash   'realgud:jdb-core)
+(declare-function realgud--jdb-parse-cmd-args 'realgud:jdb-core)
+(declare-function realgud--jdb-dot-to-slash   'realgud:jdb-core)
 
 (assert-equal '("jdb" nil ("./TestMe.java"))
-	      (realgud:jdb-parse-cmd-args '("jdb" "./TestMe.java")))
+	      (realgud--jdb-parse-cmd-args '("jdb" "./TestMe.java")))
 (assert-equal "mcb/pcingola/SnpEff/main"
-	      (realgud:jdb-dot-to-slash "mcb.pcingola.SnpEff.main"))
+	      (realgud--jdb-dot-to-slash "mcb.pcingola.SnpEff.main"))
 
 (end-tests)
