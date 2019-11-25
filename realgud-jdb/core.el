@@ -129,7 +129,7 @@ we might return:
 Note that the script name path has been expanded via `expand-file-name'."
 
   ;; Parse the following kind of pattern:
-  ;;  [ruby ruby-options] jdb jdb-options script-name script-options
+  ;;  jdb jdb-options script-name script-options
   (let (
         (args orig-args)
 	(interp-regexp
